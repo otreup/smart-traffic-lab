@@ -221,7 +221,7 @@ El proyecto puede usar ESP32-CAM o webcam del computador.
 
 Archivos rapidos:
 
-- `CAMARA_AUTO.bat`: recomendado, ESP32 primero y webcam como respaldo.
+- `CAMARA_AUTO.bat`: recomendado,  webcam primero  y ESP32 como respaldo. (ya que tiene muchos problemas de conexion)
 - `CAMARA_ESP32.bat`: solo ESP32.
 - `CAMARA_WEBCAM.bat`: solo webcam.
 
