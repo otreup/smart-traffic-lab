@@ -30,6 +30,38 @@ let activeCameraView = "pc";
 let cameraSource = "webcam";
 let cameraStreamVersion = 0;
 let pcStream = null;
+let pcDetecting = false;
+const pcCaptureCanvas = document.createElement("canvas");
+const pcCaptureCtx = pcCaptureCanvas.getContext("2d");
+
+function showDetectionData(data) {
+  detCount.textContent = data.count ?? 0;
+  currentDecision = data.decision || currentDecision;
+  detectionsList.innerHTML = "";
+
+  if (data.counts) {
+    for (const [lane, count] of Object.entries(data.counts)) {
+      const row = document.createElement("div");
+      row.className = "item";
+      row.innerHTML = `<strong>${lane}</strong><span>${count} carros</span>`;
+      detectionsList.appendChild(row);
+    }
+  }
+
+  for (const item of data.detections || []) {
+    const row = document.createElement("div");
+    row.className = "item";
+    row.innerHTML = `<strong>${item.label}</strong><span>${Math.round(item.confidence * 100)}%</span>`;
+    detectionsList.appendChild(row);
+  }
+
+  if (!data.detections || data.detections.length === 0) {
+    const row = document.createElement("div");
+    row.className = "item";
+    row.innerHTML = '<strong>Sin detecciones</strong><span>0%</span>';
+    detectionsList.appendChild(row);
+  }
+}
 
 async function startPcCamera() {
   if (pcStream) return;
@@ -40,10 +72,42 @@ async function startPcCamera() {
     });
     pcCamera.srcObject = pcStream;
     cameraStatus.textContent = "PC activa";
-    detectionsList.innerHTML = '<div class="item"><strong>Webcam PC</strong><span>video continuo del navegador</span></div>';
+    detectionsList.innerHTML = '<div class="item"><strong>Webcam PC</strong><span>video continuo + YOLO</span></div>';
   } catch (error) {
     cameraStatus.textContent = "Permiso camara";
     detectionsList.innerHTML = `<div class="item"><strong>No abrio la webcam</strong><span>${error.message}</span></div>`;
+  }
+}
+
+async function detectPcFrame() {
+  if (pcDetecting || activeCameraView !== "pc" || !modelReady || !pcStream) return;
+  if (!pcCamera.videoWidth || !pcCamera.videoHeight) return;
+
+  pcDetecting = true;
+  try {
+    pcCaptureCanvas.width = pcCamera.videoWidth;
+    pcCaptureCanvas.height = pcCamera.videoHeight;
+    pcCaptureCtx.drawImage(pcCamera, 0, 0, pcCaptureCanvas.width, pcCaptureCanvas.height);
+    const blob = await new Promise(resolve => pcCaptureCanvas.toBlob(resolve, "image/jpeg", 0.82));
+    if (!blob) return;
+
+    const form = new FormData();
+    form.append("file", blob, "webcam.jpg");
+    const response = await fetch("/detect", { method: "POST", body: form });
+    const data = await response.json();
+
+    if (!data.ok) {
+      detectionsList.innerHTML = `<div class="item"><strong>YOLO sin iniciar</strong><span>${data.error || "revisa el modelo"}</span></div>`;
+      return;
+    }
+
+    showDetectionData(data);
+    cameraStatus.textContent = "PC + YOLO";
+    lastUpdate.textContent = new Date().toLocaleTimeString();
+  } catch (error) {
+    detectionsList.innerHTML = `<div class="item"><strong>Error YOLO</strong><span>${error.message}</span></div>`;
+  } finally {
+    pcDetecting = false;
   }
 }
 
@@ -188,7 +252,12 @@ async function refreshCamera() {
   try {
     if (activeCameraView === "pc") {
       await startPcCamera();
-      detCount.textContent = "0";
+      if (modelReady) {
+        await detectPcFrame();
+      } else {
+        detCount.textContent = "0";
+        detectionsList.innerHTML = '<div class="item"><strong>IA pendiente</strong><span>descargar o entrenar YOLO</span></div>';
+      }
       lastUpdate.textContent = new Date().toLocaleTimeString();
       return;
     }
@@ -219,18 +288,7 @@ async function refreshCamera() {
       lastUpdate.textContent = new Date().toLocaleTimeString();
       return;
     }
-    detCount.textContent = data.count ?? 0;
-    currentDecision = data.decision || currentDecision;
-    detectionsList.innerHTML = "";
-    for (const item of data.detections || []) {
-      const row = document.createElement("div");
-      row.className = "item";
-      row.innerHTML = `<strong>${item.label}</strong><span>${Math.round(item.confidence * 100)}%</span>`;
-      detectionsList.appendChild(row);
-    }
-    if (!data.detections || data.detections.length === 0) {
-      detectionsList.innerHTML = '<div class="item"><strong>Sin detecciones</strong><span>0%</span></div>';
-    }
+    showDetectionData(data);
     cameraStatus.textContent = "Activa";
     lastUpdate.textContent = new Date().toLocaleTimeString();
   } catch (error) {
@@ -337,5 +395,6 @@ loadStatus();
 loadNetwork();
 refreshCamera();
 setInterval(refreshCamera, 4000);
+setInterval(detectPcFrame, 2500);
 setInterval(stepSimulation, 1200);
 animate();

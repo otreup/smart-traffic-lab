@@ -68,7 +68,7 @@ def model_status() -> dict[str, object]:
     if custom.exists():
         return {"ready": True, "kind": "custom", "message": "Modelo entrenado listo"}
     if base.exists():
-        return {"ready": True, "kind": "base", "message": "Modelo base listo"}
+        return {"ready": True, "kind": "base", "message": "Modelo base listo. Para carritos especificos falta entrenar toy_car_best.pt"}
     return {
         "ready": False,
         "kind": "missing",
