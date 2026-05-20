@@ -115,7 +115,13 @@ def mjpeg_frames():
 
 @app.get("/")
 def dashboard() -> FileResponse:
-    return FileResponse(web_dir / "index.html")
+    return FileResponse(
+        web_dir / "index.html",
+        headers={
+            "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
+            "Pragma": "no-cache",
+        },
+    )
 
 
 @app.get("/health")
