@@ -231,12 +231,4 @@ La guia esta en:
 docs/camaras.md
 ```
 
-## 15. Informe segun guia del profesor
 
-La guia del profesor fue leida y se preparo un informe base con las secciones pedidas:
-
-```text
-docs/informe_entrega_profesor.md
-```
-
-Incluye portada, introduccion, planteamiento del problema, objetivos, analisis entrada-proceso-salida, diagramas, implementacion, logica de programacion, pruebas, resultados, IA, conclusiones y referencias.
