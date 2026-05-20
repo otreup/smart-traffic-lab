@@ -24,15 +24,17 @@
     <main class="layout">
       <section class="panel camera-panel">
         <div class="panel-head">
-          <h2>Camara ESP32-CAM</h2>
+          <h2>Camara</h2>
           <span id="cameraStatus" class="status">Esperando</span>
         </div>
         <div class="camera-tabs">
-          <button id="apiViewBtn" class="tab-button active" type="button">API</button>
+          <button id="pcViewBtn" class="tab-button active" type="button">PC</button>
+          <button id="apiViewBtn" class="tab-button" type="button">API</button>
           <button id="directViewBtn" class="tab-button" type="button">ESP32</button>
           <a id="openCameraLink" class="camera-link" href="http://192.168.1.44" target="_blank" rel="noreferrer">Abrir camara</a>
         </div>
-        <img id="snapshot" class="camera-view active" alt="Camara procesada por API" />
+        <video id="pcCamera" class="camera-view active" autoplay muted playsinline></video>
+        <img id="snapshot" class="camera-view" alt="Camara procesada por API" />
         <iframe id="directCamera" class="camera-view" title="ESP32-CAM directa" src="http://192.168.1.44"></iframe>
         <div class="metrics">
           <div><strong id="detCount">0</strong><span>detecciones</span></div>

@@ -13,8 +13,10 @@ const toggleSimBtn = document.getElementById("toggleSimBtn");
 const webcamBtn = document.getElementById("webcamBtn");
 const esp32Btn = document.getElementById("esp32Btn");
 const autoBtn = document.getElementById("autoBtn");
+const pcViewBtn = document.getElementById("pcViewBtn");
 const apiViewBtn = document.getElementById("apiViewBtn");
 const directViewBtn = document.getElementById("directViewBtn");
+const pcCamera = document.getElementById("pcCamera");
 const directCamera = document.getElementById("directCamera");
 const openCameraLink = document.getElementById("openCameraLink");
 
@@ -24,9 +26,26 @@ let running = true;
 let currentDecision = null;
 let modelReady = false;
 let cameraStreamStarted = false;
-let activeCameraView = "api";
+let activeCameraView = "pc";
 let cameraSource = "webcam";
 let cameraStreamVersion = 0;
+let pcStream = null;
+
+async function startPcCamera() {
+  if (pcStream) return;
+  try {
+    pcStream = await navigator.mediaDevices.getUserMedia({
+      video: { width: { ideal: 640 }, height: { ideal: 480 } },
+      audio: false,
+    });
+    pcCamera.srcObject = pcStream;
+    cameraStatus.textContent = "PC activa";
+    detectionsList.innerHTML = '<div class="item"><strong>Webcam PC</strong><span>video continuo del navegador</span></div>';
+  } catch (error) {
+    cameraStatus.textContent = "Permiso camara";
+    detectionsList.innerHTML = `<div class="item"><strong>No abrio la webcam</strong><span>${error.message}</span></div>`;
+  }
+}
 
 function startCameraStream(force = false) {
   if (cameraStreamStarted && !force) return;
@@ -50,8 +69,9 @@ async function setCameraSource(source) {
   cameraSource = data.camera.source;
   cameraStreamVersion = data.camera.stream_version;
   updateCameraButtons();
-  activeCameraView = source === "esp32" ? "direct" : "api";
-  if (activeCameraView === "direct") {
+  if (source === "webcam") {
+    pcViewBtn.click();
+  } else if (source === "esp32") {
     directViewBtn.click();
   } else {
     apiViewBtn.click();
@@ -166,6 +186,13 @@ async function loadNetwork() {
 
 async function refreshCamera() {
   try {
+    if (activeCameraView === "pc") {
+      await startPcCamera();
+      detCount.textContent = "0";
+      lastUpdate.textContent = new Date().toLocaleTimeString();
+      return;
+    }
+
     if (activeCameraView === "direct") {
       detCount.textContent = "0";
       cameraStatus.textContent = "ESP32 web";
@@ -217,7 +244,7 @@ async function loadStatus() {
     const response = await fetch("/api/status");
     const data = await response.json();
     modelName.textContent = String(data.model || "-").split(/[\\/]/).pop();
-    if (data.camera_status) {
+  if (data.camera_status) {
       cameraSource = data.camera_status.source;
       cameraStreamVersion = data.camera_status.stream_version;
       updateCameraButtons();
@@ -271,10 +298,23 @@ webcamBtn.addEventListener("click", () => setCameraSource("webcam"));
 esp32Btn.addEventListener("click", () => setCameraSource("esp32"));
 autoBtn.addEventListener("click", () => setCameraSource("auto"));
 
+pcViewBtn.addEventListener("click", () => {
+  activeCameraView = "pc";
+  pcViewBtn.classList.add("active");
+  apiViewBtn.classList.remove("active");
+  directViewBtn.classList.remove("active");
+  pcCamera.classList.add("active");
+  snapshot.classList.remove("active");
+  directCamera.classList.remove("active");
+  refreshCamera();
+});
+
 apiViewBtn.addEventListener("click", () => {
   activeCameraView = "api";
+  pcViewBtn.classList.remove("active");
   apiViewBtn.classList.add("active");
   directViewBtn.classList.remove("active");
+  pcCamera.classList.remove("active");
   snapshot.classList.add("active");
   directCamera.classList.remove("active");
   refreshCamera();
@@ -282,8 +322,10 @@ apiViewBtn.addEventListener("click", () => {
 
 directViewBtn.addEventListener("click", () => {
   activeCameraView = "direct";
+  pcViewBtn.classList.remove("active");
   directViewBtn.classList.add("active");
   apiViewBtn.classList.remove("active");
+  pcCamera.classList.remove("active");
   directCamera.classList.add("active");
   snapshot.classList.remove("active");
   refreshCamera();

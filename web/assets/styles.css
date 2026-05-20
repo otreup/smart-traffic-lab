@@ -112,6 +112,9 @@ button.active {
 .camera-panel img {
   object-fit: cover;
 }
+.camera-panel video {
+  object-fit: cover;
+}
 
 .metrics {
   display: grid;
