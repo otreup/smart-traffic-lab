@@ -1,0 +1,25 @@
+camera_url: http://192.168.1.44
+camera_source: webcam
+camera_urls:
+- http://192.168.1.44/stream
+- http://192.168.1.44:81/stream
+- http://192.168.1.44
+snapshot_urls:
+- http://192.168.1.44/capture
+- http://192.168.1.44
+fallback_camera_url: http://192.168.1.44/stream
+use_webcam_fallback: true
+webcam_index: 0
+model_path: yolo11n.pt
+custom_model_path: models/toy_car_best.pt
+confidence: 0.35
+iou: 0.45
+image_size: 640
+classes:
+- toy_car
+capture:
+  output_dir: data/raw
+  prefix: toy_car
+api:
+  host: 0.0.0.0
+  port: 8000
