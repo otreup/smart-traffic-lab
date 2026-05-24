@@ -1,0 +1,134 @@
+
+--- PAGINA 1 ---
+Guía del Proyecto Final
+Algoritmos y Programación
+Universidad Industrial de Santander
+Escuela de Ingeniería de Sistemas e Informática
+Ingeniería en Inteligencia Artificial
+Propósito del documento
+El documento del proyecto debe presentar el desarrollo de una solución computacional a
+una problemática seleccionada por el equipo. La problemática puede estar relacionada con
+ingeniería, datos, simulación, automatización, análisis numérico, procesamiento básico de
+información o una aplicación introductoria de Inteligencia Artificial.
+Sin embargo, el énfasis principal no está en la sofisticación del modelo algorítmico, sino en
+evidenciar que el estudiante comprende y aplica correctamente la lógica de programación.
+El proyecto debe demostrar la capacidad de analizar un problema, identificar sus variables,
+diseñar una solución, implementarla, probarla y documentarla adecuadamente.
+1. Portada
+La portada debe incluir la siguiente información estructurada:
+•Universidad y Escuela.
+•Programa académico.
+•Nombre de la asignatura.
+•Título del proyecto (debe reflejar claramente el problema y la solución).
+•Nombre completo de los integrantes.
+•Nombre del profesor.
+•Fecha de entrega.
+1
+--- PAGINA 2 ---
+2. Introducción
+La introducción presenta de manera general el tema del proyecto, el contexto del problema y la
+importancia de resolverlo mediante programación. Debe responder:
+•¿Cuál es el tema general del proyecto?
+•¿Por qué es importante el problema seleccionado?
+•¿Qué papel cumple la programación en la solución?
+•¿Qué se espera lograr con el programa desarrollado?
+3. Planteamiento del problema
+Describa el problema específico que se quiere resolver. Este debe estar claramente delimitado para
+permitir el diseño de un algoritmo funcional.
+•¿Cuál es la problemática central?
+•¿Qué información/datos necesita el sistema para operar?
+•¿Qué resultado o entregable debe generar?
+•¿Qué restricciones, límites o condiciones físicas/lógicas tiene el problema?
+4. Objetivos
+4.1. Objetivo general
+Debe expresar con verbos en infinitivo qué se busca lograr mediante la construcción del programa.
+Ejemplo de Objetivo General
+Desarrollar una solución algorítmica mediante programación estructurada para resolver [pro-
+blema seleccionado], aplicando conceptos fundamentales como variables, estructuras de con-
+trol, funciones y arreglos, garantizando su correcta ejecución mediante pruebas de validación.
+4.2. Objetivos específicos
+Representan los pasos necesarios para alcanzar el objetivo general. Pueden orientarse a:
+•Analizar el problema e identificar las entradas, procesos y salidas.
+2
+--- PAGINA 3 ---
+•Diseñar el algoritmo mediante diagramas de bloques y pseudocódigo.
+•Implementar la solución en el entorno de desarrollo seleccionado.
+•Ejecutar pruebas de validación con casos de frontera.
+5. Análisis del problema
+Esta sección es fundamental. El equipo debe demostrar que entiende las reglas del dominio antes de
+escribir una sola línea de código. Se exige el uso de una tabla de análisis de requerimientos.
+Elemento Descripción Técnica
+EntradasDatos que el usuario, el entorno o un archivo proporcionan al progra-
+ma.
+ProcesosOperaciones matemáticas, transformaciones y flujos de decisión.
+SalidasResultados concretos que el sistema entrega tras el procesamiento.
+V ariables ClaveNombres y tipos de datos críticos para el control del estado.
+RestriccionesCondiciones inviolables (ej. valores positivos, límites de memoria).
+Cuadro 1: Estructura del análisis Entrada-Proceso-Salida.
+6. Diseño del algoritmo
+Antes de presentar el código, se debe evidenciar la planificación lógica de la solución. En esta
+asignatura, todo el diseño debe sustentarse en diagramas de bloques, priorizando la abstracción
+lógica sobre el código puro.
+Debe incluir:
+•Diagrama de bloques funcionales:Mostrando la interacción entre las partes del sistema.
+•Diagrama de flujo detallado para los algoritmos críticos.
+•División modular (subproblemas).
+Flujo lógico esperado en el diseño:
+Adquisición de datos Validación− − − − − − →Procesamiento Numérico/LógicoDecisión− − − − − →Salida Formateada
+7. Implementación del programa
+Descripción técnica del entorno y la traducción del diagrama de bloques a código real.
+3
+--- PAGINA 4 ---
+•Lenguaje:Python.
+•Entorno (IDE/Plataforma):Se recomienda el uso de entornos interactivos como Jupyter No-
+tebooks o Google Colab, especialmente si se integran con metodologías activas.
+•Estructura del código:Descripción de los módulos y funciones creadas.
+Nota: No es necesario adjuntar el código completo en el texto si es muy extenso; utilice fragmentos
+clave e incluya el código fuente completo como anexo o repositorio.
+8. Explicación de la lógica de programación
+El equipo debe argumentar el "por qué2el çómo". No basta con indicar que el código compila o se
+ejecuta. Debe detallarse:
+•La justificación detrás de la elección de los ciclos (forvswhile).
+•El árbol de decisiones (estructuras condicionales múltiples).
+•La forma en que las funciones modulan el problema.
+•La manipulación de estructuras de datos (matrices, vectores o listas).
+9. Pruebas de funcionamiento (Testing)
+El programa debe ser sometido a un rigor de pruebas para validar su robustez, controlando excep-
+ciones y entradas atípicas.
+ID Caso de Entrada Resultado Esperado Observación / Estado
+01 Datos dentro del rango Cálculo exitoso Funciona correctamente.
+02 Valores límite (Frontera) Manejo correcto del lími-
+te
+Se activó la condición de bor-
+de.
+03 Tipo de dato incorrecto Mensaje de advertencia Excepción capturada, no co-
+lapsa.
+Cuadro 2: Matriz de casos de prueba.
+10. Resultados y Análisis
+Presentación de los datos obtenidos tras la ejecución exitosa.
+•¿El programa resolvió la problemática original?
+4
+--- PAGINA 5 ---
+•¿Qué limitaciones algorítmicas se detectaron durante el desarrollo?
+•¿Cómo podría optimizarse la complejidad espacial o temporal del código?
+Cada gráfica, tabla o captura de pantalla debe contar con un párrafo explicativo asociado.
+11. Aplicaciones de Inteligencia Artificial (Si aplica)
+Si el proyecto se enmarca en Inteligencia Artificial, debe mantenerse en un nivel estrictamente
+introductorio (ej. heurísticas simples, evaluación de reglas, árboles de decisión básicos o uso de
+modelos preentrenados genéricos).
+Importante:No se exige ni se espera la implementación de arquitecturas avanzadas (como Redes
+Neuronales Convolucionales, Recurrentes o Decoders). El enfoque de evaluación seguirá siendo la
+solidez de la lógica de programación base, el manejo de arreglos y la modularidad del diseño.
+12. Conclusiones
+Respuesta directa a los objetivos planteados. Deben destacar el aprendizaje técnico del equipo res-
+pecto al pensamiento algorítmico y la utilidad de la automatización en el contexto del problema
+resuelto.
+13. Referencias
+Formato estándar (IEEE o APA) de las fuentes consultadas, repositorios, documentaciones oficiales
+de librerías y material del curso.
+Criterio Central de Evaluación
+El proyecto no será evaluado únicamente por compilar sin errores. La calificación dependerá
+de la capacidad del equipo para abstraer el problema, diseñar un diagrama de bloques cohe-
+rente, implementar una estructura de código limpia, y documentar sólidamente las pruebas
+y la lógica matemática/computacional detrás de su solución.
+5

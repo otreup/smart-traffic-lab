@@ -4,3 +4,32 @@ ffmpeg.exe
 video_frame_*.jpg
 video_transcript.txt
 qr_*.png
+# Entorno local
+.venv/
+__pycache__/
+*.py[cod]
+
+# Salidas y temporales
+logs/
+runs/
+*.log
+
+# Datos y modelos pesados
+data/raw/
+data/images/
+data/labels/
+models/*.pt
+*.pt
+
+# Archivos SUMO o ZIP importados que no se usan en la entrega actual
+map.zip
+sumo/imported_map/
+
+# Libros y PDFs grandes de referencia local
+A Primer on Scientific Programming with Python*.pdf
+vdoc.pub_*.pdf
+
+# Sistema/editor
+.DS_Store
+Thumbs.db
+.vscode/

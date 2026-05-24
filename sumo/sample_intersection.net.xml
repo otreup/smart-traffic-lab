@@ -1,0 +1,32 @@
+﻿<net version="1.20" junctionCornerDetail="5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <location netOffset="0.00,0.00" convBoundary="0.00,0.00,300.00,220.00" origBoundary="0.00,0.00,300.00,220.00" projParameter="!"/>
+  <edge id="north_in" from="n1" to="c" priority="1">
+    <lane id="north_in_0" index="0" speed="13.90" length="110.00" shape="150.00,220.00 150.00,110.00"/>
+  </edge>
+  <edge id="south_in" from="s1" to="c" priority="1">
+    <lane id="south_in_0" index="0" speed="13.90" length="110.00" shape="150.00,0.00 150.00,110.00"/>
+  </edge>
+  <edge id="west_in" from="w1" to="c" priority="1">
+    <lane id="west_in_0" index="0" speed="13.90" length="150.00" shape="0.00,110.00 150.00,110.00"/>
+  </edge>
+  <edge id="east_in" from="e1" to="c" priority="1">
+    <lane id="east_in_0" index="0" speed="13.90" length="150.00" shape="300.00,110.00 150.00,110.00"/>
+  </edge>
+  <edge id="north_out" from="c" to="n1" priority="1">
+    <lane id="north_out_0" index="0" speed="13.90" length="110.00" shape="156.00,110.00 156.00,220.00"/>
+  </edge>
+  <edge id="south_out" from="c" to="s1" priority="1">
+    <lane id="south_out_0" index="0" speed="13.90" length="110.00" shape="144.00,110.00 144.00,0.00"/>
+  </edge>
+  <edge id="west_out" from="c" to="w1" priority="1">
+    <lane id="west_out_0" index="0" speed="13.90" length="150.00" shape="150.00,116.00 0.00,116.00"/>
+  </edge>
+  <edge id="east_out" from="c" to="e1" priority="1">
+    <lane id="east_out_0" index="0" speed="13.90" length="150.00" shape="150.00,104.00 300.00,104.00"/>
+  </edge>
+  <junction id="c" type="traffic_light" x="150.00" y="110.00" incLanes="north_in_0 south_in_0 west_in_0 east_in_0" intLanes="" shape="138.00,98.00 162.00,98.00 162.00,122.00 138.00,122.00"/>
+  <junction id="n1" type="priority" x="150.00" y="220.00" incLanes="north_out_0" intLanes="" shape="140.00,220.00 160.00,220.00"/>
+  <junction id="s1" type="priority" x="150.00" y="0.00" incLanes="south_out_0" intLanes="" shape="140.00,0.00 160.00,0.00"/>
+  <junction id="w1" type="priority" x="0.00" y="110.00" incLanes="west_out_0" intLanes="" shape="0.00,100.00 0.00,120.00"/>
+  <junction id="e1" type="priority" x="300.00" y="110.00" incLanes="east_out_0" intLanes="" shape="300.00,100.00 300.00,120.00"/>
+</net>
