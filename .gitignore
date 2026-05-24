@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+ffmpeg.exe
+video_frame_*.jpg
+video_transcript.txt
+qr_*.png
